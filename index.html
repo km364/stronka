@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biuletyn Informacji Publicznej - COI Mielec</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; overflow-x: hidden; }
+        .navbar { background-color: #004080; }
+        .navbar-brand, .nav-link { color: #ffffff !important; }
+        .footer { background-color: #004080; color: white; text-align: center; padding: 10px; margin-top: 20px; }
+        .container { max-width: 1200px; }
+        .menu-container { display: flex; transition: transform 0.4s ease-in-out; }
+        .menu-list { list-style-type: none; padding: 0; width: 300px; transition: transform 0.4s ease-in-out; }
+        .menu-item { background-color: #ffffff; padding: 10px; margin: 5px 0; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; position: relative; }
+        .menu-item:hover { background-color: #e9ecef; }
+        .submenu { display: none; list-style-type: none; padding-left: 20px; margin-top: 5px; }
+        .submenu li { background-color: #f1f1f1; padding: 8px; margin: 2px 0; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; }
+        .submenu li:hover { background-color: #ddd; }
+        .content { flex-grow: 1; padding: 20px; background: white; min-height: 400px; display: block; }
+        .search-box { margin-bottom: 20px; }
+        .banner { width: 100%; max-height: 200px; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <img src="BIP_COI_MIELEC_Banner.png" alt="Baner BIP COI Mielec" class="banner">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">BIP - COI Mielec</a>
+        </div>
+    </nav>
+    
+    <div class="container mt-4 menu-container">
+        <div class="search-box">
+            <input type="text" id="searchInput" class="form-control" placeholder="Szukaj w menu..." onkeyup="filterMenu()">
+        </div>
+        <ul class="menu-list" id="menuList">
+            <li class="menu-item" onclick="toggleMenu(event, this)">O nas
+                <ul class="submenu">
+                    <li onclick="toggleMenu(event, this)">Kierownictwo
+                        <ul class="submenu">
+                            <li onclick="showContent('oswiadczenia')">Oświadczenia majątkowe</li>
+                        </ul>
+                    </li>
+                    <li onclick="showContent('struktura')">Struktura organizacyjna</li>
+                    <li onclick="toggleMenu(event, this)">Status prawny
+                        <ul class="submenu">
+                            <li onclick="showContent('start')">Start</li>
+                            <li onclick="showContent('regulamin')">Regulamin</li>
+                        </ul>
+                    </li>
+                    <li onclick="showContent('majatek')">Majątek</li>
+                    <li onclick="showContent('budzet')">Budżet</li>
+                    <li onclick="showContent('zadania')">Zadania</li>
+                </ul>
+            </li>
+            <li class="menu-item" onclick="showContent('prawo')">Prawo i prace legislacyjne</li>
+            <li class="menu-item" onclick="toggleMenu(event, this)">Zamówienia publiczne
+                <ul class="submenu">
+                    <li onclick="showContent('plan-zamowien')">Plan zamówień publicznych</li>
+                    <li onclick="showContent('wykaz-zamowien')">Wykaz zamówień publicznych</li>
+                </ul>
+            </li>
+            <li class="menu-item" onclick="showContent('praca')">Praca</li>
+            <li class="menu-item" onclick="showContent('kontrola')">Kontrola</li>
+            <li class="menu-item" onclick="showContent('zalatwianie-spraw')">Przyjmowanie i załatwianie spraw</li>
+            <li class="menu-item" onclick="showContent('informacja')">Dostęp do informacji niezamieszczonej w BIP</li>
+            <li class="menu-item" onclick="showContent('informacja-ponowne')">Informacja publiczna do ponownego wykorzystania</li>
+            <li class="menu-item" onclick="showContent('rejestry')">Rejestry, ewidencje, archiwa</li>
+            <li class="menu-item" onclick="showContent('instrukcja')">Instrukcja obsługi</li>
+            <li class="menu-item" onclick="showContent('linki')">Linki</li>
+            <li class="menu-item" onclick="showContent('kontakt')">Kontakt</li>
+            <li class="menu-item" onclick="showContent('ogloszenia')">Ogłoszenia</li>
+            <li class="menu-item" onclick="showContent('sprawozdania')">Sprawozdania finansowe</li>
+            <li class="menu-item" onclick="showContent('sygnalisci')">Sygnaliści</li>
+            <li class="menu-item" onclick="showContent('rodo')">RODO</li>
+            <li class="menu-item" onclick="showContent('deklaracja')">Deklaracja dostępności</li>
+        </ul>
+        <div class="content" id="content">
+            <h3 id="content-title"></h3>
+            <p id="content-text">Wybierz podstronę z menu, aby zobaczyć jej treść.</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 COI Mielec - Biuletyn Informacji Publicznej | Kontakt: info@coimielec.pl</p>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function toggleMenu(event, element) {
+            event.stopPropagation();
+            let submenu = element.querySelector(".submenu");
+            if (submenu) {
+                submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
+            }
+        }
+
+        function showContent(page) {
+            document.getElementById('content-title').innerText = page.replace('-', ' ').toUpperCase();
+            document.getElementById('content-text').innerText = 'Tutaj znajduje się treść dla: ' + page;
+            document.getElementById('content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
